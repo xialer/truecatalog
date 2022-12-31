@@ -3,7 +3,7 @@
 
 ---
 {{ $DOMAIN := .Values.config.nodeIP | quote -}}
-{{ $URL := (printf "http://%s/" .Values.config.nodeIP) }}
+{{ $URL := (printf "http://%s:%s/" .Values.config.nodeIP .Values.service.main.ports.main.targetPort) }}
 
 {{- if and (.Values.ingress.main.enabled) (gt (len .Values.ingress.main.hosts) 0) -}}
   {{- $DOMAIN = (index .Values.ingress.main.hosts 0).host -}}
